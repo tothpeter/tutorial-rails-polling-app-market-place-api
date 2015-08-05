@@ -39,3 +39,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
 end
+
+gem 'devise'
+gem 'active_model_serializers', '0.10.0.rc2'
