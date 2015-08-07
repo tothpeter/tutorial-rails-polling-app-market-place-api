@@ -28,6 +28,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :development do
+  # sabisu gems
+  gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+  gem 'compass-rails', '~> 2.0.2'
+  gem 'furatto'
+  gem 'font-awesome-rails'
+  gem 'simple_form'
+end
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
