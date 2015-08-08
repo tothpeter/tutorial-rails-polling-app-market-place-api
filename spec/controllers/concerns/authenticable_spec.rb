@@ -5,7 +5,8 @@ class Authentication
 
   def request;end
   def response;end
-end
+  def render args
+  end
 end
 
 describe Authenticable do
@@ -24,21 +25,37 @@ describe Authenticable do
     end
   end
 
-  describe "#authenticate_with_token" do
-    before do
-      @user = FactoryGirl.create :user
-      # This is comming from the book, testing a method withput calling it is PRECIOUS!
-      
-      # allow(authentication).to receive_messages(:current_user => nil)
-      # allow(response).to receive_messages(:response_code => 401)
-      # allow(response).to receive_messages(:body => {"errors" => "Not authenticated"}.to_json)
-      # allow(authentication).to receive_messages(:response => response)
-    end
+  # describe "#authenticate_with_token" do
+  #   before do
+  #     @user = FactoryGirl.create :user
+  #     # This is comming from the book, testing a method withput calling it is PRECIOUS!
 
-    it "render a json error message" do
-      # expect(json_response[:errors]).to eql "Not authenticated"
-    end
+  #     # allow(authentication).to receive_messages(:current_user => nil)
+  #     # allow(response).to receive_messages(:response_code => 401)
+  #     # allow(response).to receive_messages(:body => {"errors" => "Not authenticated"}.to_json)
+  #     # allow(authentication).to receive_messages(:response => response)
+  #   end
+
+  #   it "render a json error message" do
+  #     # expect(json_response[:errors]).to eql "Not authenticated"
+  #   end
 
     # it {  should respond_with 401 }
+
+  describe "#authenticate_with_token" do
+    before do
+      allow(authentication).to receive(:current_user).and_return(nil)
+      allow(authentication).to receive(:render) do |args|
+        args
+      end
+    end
+
+    it "returns error" do
+      expect(authentication.authenticate_with_token![:json][:errors]).to eql "Not authenticated"
+    end
+
+    it "returns unauthorized status" do
+      expect(authentication.authenticate_with_token![:status]).to eql :unauthorized
+    end
   end
 end
