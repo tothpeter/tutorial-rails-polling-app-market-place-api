@@ -3,6 +3,6 @@ FactoryGirl.define do
     title "Super Product Name"
     price "9.99"
     published false
-    user nil
+    user
   end
 end
