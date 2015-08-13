@@ -22,7 +22,7 @@ if Rails.env.development?
     # config.layout = "sabisu"
 
     # Resources on the api
-    config.resources = [:users]
+    config.resources = [:users, :products]
     config.default_resource = :users
 
     # Application name
