@@ -35,6 +35,10 @@ group :development do
   gem 'furatto'
   gem 'font-awesome-rails'
   gem 'simple_form'
+
+  # Faker
+  gem 'faker'
+  gem 'populator'
 end
 
 group :development, :test do

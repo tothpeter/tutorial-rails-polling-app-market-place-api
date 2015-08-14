@@ -34,3 +34,6 @@ bundle exec rspec spec/controllers
 
 ## API Explorer
 http://market-place-api.dev/sabisu_rails/explorer
+
+## populate the database
+rake db:populate
