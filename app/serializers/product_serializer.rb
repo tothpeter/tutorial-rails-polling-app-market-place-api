@@ -1,3 +1,3 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :title, :price
+  attributes :title, :price, :published
 end
