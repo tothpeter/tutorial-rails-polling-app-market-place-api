@@ -4,7 +4,11 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
   
   def show
-    respond_with User.find(params[:id])
+    if params[:include] == "products"
+      respond_with User.find(params[:id]), include: 'products'
+    else
+      respond_with User.find(params[:id])
+    end
   end
 
   def create
