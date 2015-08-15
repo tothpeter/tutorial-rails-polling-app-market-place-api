@@ -12,6 +12,11 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       expect(product_response[:data][:attributes][:title]).to eql @product.title
     end
 
+    it "has the user as a embeded object" do
+      product_response = json_response
+      expect(product_response[:data][:relationships][:user][:data][:id]).to eql @product.user.id.to_s
+    end
+
     it { should respond_with 200 }
   end
 
@@ -26,6 +31,13 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       products_response = json_response
       expect(products_response[:data].length).to eq 4
     end
+
+    it "returns the user object into each product" do
+        products_response = json_response[:data]
+        products_response.each do |product_response|
+          expect(product_response[:relationships][:user]).to be_present
+        end
+      end
 
     it { should respond_with 200 }
   end
