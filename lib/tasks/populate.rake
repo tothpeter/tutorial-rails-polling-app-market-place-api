@@ -26,9 +26,14 @@ namespace :db do
 
       puts 'Products done'
 
-      Order.populate 2 do |product|
-        product.total = Faker::Commerce.price
-        product.user_id = user.id
+      Order.populate 2 do |order|
+        order.total = Faker::Commerce.price
+        order.user_id = user.id
+
+        Placement.populate 2 do |placement|
+          placement.order_id = order.id
+          placement.product_id = 1
+        end
       end
 
       puts 'Orders done'
