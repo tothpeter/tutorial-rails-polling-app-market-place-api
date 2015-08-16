@@ -8,6 +8,7 @@ RSpec.describe Product, type: :model do
   it { should respond_to(:price) }
   it { should respond_to(:published) }
   it { should respond_to(:user_id) }
+  it { should respond_to :quantity }
   it { expect(product.published).to be false }
 
   it { should validate_presence_of :title }
