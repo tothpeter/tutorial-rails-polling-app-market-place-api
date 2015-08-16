@@ -41,4 +41,24 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  describe "#valid?" do
+    before do
+      user = FactoryGirl.create :user
+
+      product_1 = FactoryGirl.create :product, price: 100, quantity: 5, user: user
+      product_2 = FactoryGirl.create :product, price: 85, quantity: 10, user: user
+
+      placement_1 = FactoryGirl.build :placement, product: product_1, quantity: 3
+      placement_2 = FactoryGirl.build :placement, product: product_2, quantity: 15
+
+      @order = FactoryGirl.build :order, user: user
+
+      @order.placements << placement_1
+      @order.placements << placement_2
+    end
+
+    it "becomes invalid due to insufficient products" do
+      expect(@order).to_not be_valid
+    end
+  end
 end
